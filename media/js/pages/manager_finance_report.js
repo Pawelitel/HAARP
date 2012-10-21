@@ -1,1 +1,1 @@
-$($("tr.caption th")[0]).append('<div id="loading-ajax"><img src="http://i38.fastpic.ru/big/2012/0524/96/5b354dc65439874a52f17728e730ac96.gif"/></div>');parser.parseFinance();$("#loading-ajax").each(function(){$(this).remove()});
+﻿$($("tr.caption th")[0]).append('<div id="loading-ajax"><img src="http://i38.fastpic.ru/big/2012/0524/96/5b354dc65439874a52f17728e730ac96.gif"/></div>');parser.parseFinance();$("#loading-ajax").each(function(){$(this).remove()});
