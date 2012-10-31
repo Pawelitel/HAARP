@@ -49,7 +49,7 @@ function code() {
 		var scriptLoader = w.document.createElement("script");
 		scriptLoader.type = "text/javascript";
 		scriptLoader.async = false;
-		scriptLoader.src = HaarpHttp + '/HAARP/media/js/loader.js';
+		scriptLoader.src = HaarpHttp + '/media/js/loader.js';
 		w.document.getElementsByTagName('head')[0].appendChild(scriptLoader);
 
 	} catch (e) {
