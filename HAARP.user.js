@@ -3,40 +3,36 @@
 // @nocompat
 // @name		Loader
 // @namespace	HAARP
-// @description	Hockey Arena Analytical Research Program. Юзерскрипт для http://www.hockeyarena.net/ 
-// @version		0.3.1
+// @description	Hockey Arena Analytical Research Program. Юзерскрипт для hockeyarena.net
+// @version		0.3.2
 // @updateURL   http://pawelitel.github.com/HAARP/haarp.meta.js
 // @downloadURL	http://pawelitel.github.com/HAARP/haarp.user.js
-// @author		P4w3133731
+// @author		Pawelitel
+// @copyright   Pawelitel
+// @license     MIT
 // @include		http://*.hockeyarena.net/ru/*
 // @include		http://hockeyarena.net/ru/*
 // @match		http://*.hockeyarena.net/ru/*
 // @match		http://hockeyarena.net/ru/*
 // ==/UserScript==
 
-var _timer = setInterval(function(window, undefined )
-{
-	clearInterval(_timer);
-	
-	try
-	{
-		var w;
-		if (typeof unsafeWindow != undefined)//для мозиллы
-		{
-			w = unsafeWindow
-		} else
-		{
-			w = window;  
-		}
-		if (w.self != w.top)//не запускать во фреймах
-		{
-			return;
-		}
+var w; //window
+var u = typeof w; //undefined
+if (typeof unsafeWindow != u) //для мозиллы
+w = unsafeWindow
+else w = window;
 
-		if (undefined == w.document.getElementsByTagName("head")[0])//для страниц без скриптов
+function code() {
+	clearInterval(_timer);
+	//путь к готовым феймворкам и библиотекам
+	var CdnHttp = "http://pawelitel.github.com/CDN";
+	//путь к скриптам HAARP
+	var HaarpHttp = "http://pawelitel.github.com/HAARP";
+	try {
+		if (w.self != w.top) return; //не запускать во фреймах
+		if (u == w.document.getElementsByTagName("head")[0]) //для страниц без скриптов
 		{
-			if (undefined == w.document.getElementsByTagName("html")[0])
-			{
+			if (u == w.document.getElementsByTagName("html")[0]) {
 				var sc = w.document.createElement("html");
 				document.appendChild(sc)
 			}
@@ -44,18 +40,21 @@ var _timer = setInterval(function(window, undefined )
 				elm = w.document.getElementsByTagName("html")[0];
 			elm.appendChild(sc)
 		};
-		function load (w,href)
-		{
-			var scriptYN = w.document.createElement("script");
-			scriptYN.type = "text/javascript";
-			scriptYN.async = false;
-			scriptYN.src = href;
-			w.document.getElementsByTagName('head')[0].appendChild(scriptYN);
-		}
+		//объявление путей
+		var script = w.document.createElement('script');
+		script.setAttribute('type', 'text/javascript');
+		script.innerHTML = 'var CdnHttp = "' + CdnHttp + '";var HaarpHttp = "' + HaarpHttp + '";';
+		w.document.getElementsByTagName('head')[0].appendChild(script);
+		//загрузка плагина
+		var scriptLoader = w.document.createElement("script");
+		scriptLoader.type = "text/javascript";
+		scriptLoader.async = false;
+		scriptLoader.src = HaarpHttp + '/HAARP/media/js/loader.js';
+		w.document.getElementsByTagName('head')[0].appendChild(scriptLoader);
 
-		load(w,'http://pawelitel.github.com/CDN/javascripts/min/breeze.min.js');
-		load(w,'http://pawelitel.github.com/CDN/javascripts/min/simpleCookie.min.js');
-		load(w,'http://pawelitel.github.com/HAARP/media/js/loader.js');
-		
-	} catch (e){console.error(e)}
-}(window), 20);
+	} catch (e) {
+		console.error(e)
+	}
+}
+// скрипт должен грузится после прорисовки страницы в любом браузере
+var _timer = setInterval(code, 20);
