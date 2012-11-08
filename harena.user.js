@@ -1,4 +1,4 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name           harena16mb
 // @namespace      harena16mb
 // @description    harena16mb

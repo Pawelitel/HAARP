@@ -1,4 +1,4 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @run-at		document-end
 // @nocompat
 // @name		Loader

@@ -1,4 +1,4 @@
-﻿var test = <><![CDATA[
+var test = <><![CDATA[
 // ==UserScript==
 // @name           test
 // @namespace      test
